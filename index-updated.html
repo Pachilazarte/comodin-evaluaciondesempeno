@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE - Sistema de Evaluación de Desempeño</title>
+    <link rel="icon" type="image/png" href="./img/favicon.png" sizes="32x32">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Fondo ONE -->
+    <div class="bg">
+        <div class="hex"></div>
+    </div>
+    <canvas id="stars"></canvas>
+
+    <!-- Contenido principal -->
+    <div class="wrap">
+        <!-- Header -->
+        <header id="mainHeader">
+            <div class="nav">
+                <div class="brand">
+                    <div class="mark"></div>
+                    <div>
+                        <div class="name">ONE</div>
+                        <span class="sub">Sistema de Evaluación</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main>
+            <div class="container">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <h1><span class="grad-cyan">Evaluación de Desempeño</span></h1>
+                    <p>Plataforma inteligente de gestión del talento humano</p>
+                </div>
+
+                <!-- Selector de Tipo de Evaluación -->
+                <section id="tipo-evaluacion-section" class="section">
+                    <div class="card-box">
+                        <div class="section-header">
+                            <div class="step-badge">Paso 1</div>
+                            <h2>Seleccione el Tipo de Evaluación</h2>
+                            <p class="desc">Elija el formato que mejor se adapte al perfil del colaborador</p>
+                        </div>
+
+                        <div class="tipo-grid">
+                            <button class="tipo-card tipo-btn" data-tipo="periodo-prueba">
+                                <div class="tipo-icon">📋</div>
+                                <h3>Período de Prueba</h3>
+                                <p>Evaluación inicial de desempeño durante el periodo de adaptación</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+
+                            <button class="tipo-card tipo-btn" data-tipo="farmaceutico">
+                                <div class="tipo-icon">💊</div>
+                                <h3>Farmacéutico / Técnico</h3>
+                                <p>Personal técnico farmacéutico con responsabilidades clínicas</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+
+                            <button class="tipo-card tipo-btn" data-tipo="cajero">
+                                <div class="tipo-icon">💰</div>
+                                <h3>Cajero</h3>
+                                <p>Atención al cliente y operación de punto de venta</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+
+                            <button class="tipo-card tipo-btn" data-tipo="auxiliar-farmacia">
+                                <div class="tipo-icon">🏥</div>
+                                <h3>Auxiliar de Farmacia</h3>
+                                <p>Soporte farmacéutico con responsabilidad de caja</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+
+                            <button class="tipo-card tipo-btn" data-tipo="cajero-repo">
+                                <div class="tipo-icon">📦</div>
+                                <h3>Cajero y Repovolante</h3>
+                                <p>Caja y gestión de inventario y reposición</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+
+                            <button class="tipo-card tipo-btn" data-tipo="control-interno">
+                                <div class="tipo-icon">🔍</div>
+                                <h3>Control Interno</h3>
+                                <p>Supervisión, auditoría y control de procesos</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+
+                            <button class="tipo-card tipo-btn featured" data-tipo="mensual-operativo">
+                                <div class="featured-badge">Más usado</div>
+                                <div class="tipo-icon">📊</div>
+                                <h3>Evaluación Mensual</h3>
+                                <p>Seguimiento operativo mensual de desempeño</p>
+                                <div class="tipo-link">Seleccionar →</div>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Formulario de Datos del Empleado -->
+                <section id="datos-empleado-section" class="section hidden">
+                    <div class="card-box">
+                        <button class="btn-back" onclick="volverTipoEvaluacion()">← Volver</button>
+                        
+                        <div class="section-header">
+                            <div class="step-badge">Paso 2</div>
+                            <h2>Datos del Empleado</h2>
+                            <p class="desc">Complete la información del colaborador a evaluar</p>
+                        </div>
+
+                        <form id="datos-empleado-form">
+                            <div class="form-section">
+                                <h3>👤 Información Personal</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Apellido y Nombre <span class="req">*</span></label>
+                                        <input type="text" id="nombre-apellido" placeholder="Ej: García, Juan Carlos" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>DNI <span class="req">*</span></label>
+                                        <input type="text" id="dni" placeholder="12345678" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Legajo</label>
+                                        <input type="text" id="legajo" placeholder="Número de legajo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Puesto <span class="req">*</span></label>
+                                        <input type="text" id="puesto" placeholder="Ej: Farmacéutico" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>🏢 Información Laboral</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Categoría</label>
+                                        <input type="text" id="categoria" placeholder="Categoría laboral">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Área <span class="req">*</span></label>
+                                        <input type="text" id="area" placeholder="Ej: Farmacia" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha de Ingreso</label>
+                                        <input type="date" id="fecha-ingreso">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Local/Sucursal <span class="req">*</span></label>
+                                        <input type="text" id="local" placeholder="Ej: Sucursal Centro" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>👔 Datos del Jefe Directo</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Apellido y Nombre <span class="req">*</span></label>
+                                        <input type="text" id="jefe-nombre" placeholder="Apellido, Nombre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Legajo</label>
+                                        <input type="text" id="jefe-legajo" placeholder="Número de legajo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Puesto <span class="req">*</span></label>
+                                        <input type="text" id="jefe-puesto" placeholder="Ej: Gerente de Sucursal" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Período de Evaluación</label>
+                                        <input type="text" id="periodo-evaluacion" placeholder="Desde 01/01/2025 hasta 31/01/2025">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Continuar a Evaluación →</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Formulario de Evaluación -->
+                <section id="evaluacion-section" class="section hidden">
+                    <div class="card-box">
+                        <button class="btn-back" onclick="volverDatosEmpleado()">← Volver</button>
+                        
+                        <div class="section-header">
+                            <div class="step-badge">Paso 3</div>
+                            <h2 id="evaluacion-titulo">Evaluación de Desempeño</h2>
+                            <p class="desc">Complete todos los criterios de evaluación con precisión</p>
+                        </div>
+
+                        <div class="datos-resumen" id="datos-resumen"></div>
+
+                        <div class="escala-container">
+                            <h3>📏 Escala de Evaluación</h3>
+                            <div class="escala-grid" id="escala-grid"></div>
+                        </div>
+
+                        <form id="evaluacion-form">
+                            <div id="competencias-container"></div>
+
+                            <div id="seccion-adicional" class="form-section hidden">
+                                <h3>ℹ️ Información Adicional</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Ausentismo</label>
+                                        <div class="toggle-group">
+                                            <label class="toggle-option">
+                                                <input type="radio" name="ausentismo" value="SI">
+                                                <span class="toggle-mark">SI</span>
+                                            </label>
+                                            <label class="toggle-option">
+                                                <input type="radio" name="ausentismo" value="NO" checked>
+                                                <span class="toggle-mark">NO</span>
+                                            </label>
+                                        </div>
+                                        <input type="number" id="dias-ausentes" class="hidden" placeholder="Cantidad de días" min="0">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Sanciones</label>
+                                        <div class="toggle-group">
+                                            <label class="toggle-option">
+                                                <input type="radio" name="sanciones" value="SI">
+                                                <span class="toggle-mark">SI</span>
+                                            </label>
+                                            <label class="toggle-option">
+                                                <input type="radio" name="sanciones" value="NO" checked>
+                                                <span class="toggle-mark">NO</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>En caso de sanciones, aclare cuáles:</label>
+                                    <textarea id="detalle-sanciones" class="hidden" rows="3" placeholder="Describa las sanciones aplicadas..."></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Se solicita desvinculación en período de prueba</label>
+                                    <div class="toggle-group">
+                                        <label class="toggle-option">
+                                            <input type="radio" name="desvinculacion" value="SI">
+                                            <span class="toggle-mark">SI</span>
+                                        </label>
+                                        <label class="toggle-option">
+                                            <input type="radio" name="desvinculacion" value="NO" checked>
+                                            <span class="toggle-mark">NO</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>📝 Retroalimentación y Desarrollo</h3>
+                                <div class="form-group">
+                                    <label>⭐ Aspectos Destacados</label>
+                                    <textarea id="aspectos-destacados" rows="4" placeholder="Indicar los aspectos positivos y fortalezas observadas..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>💪 Tareas con Mayor Habilidad</label>
+                                    <textarea id="habilidades" rows="3" placeholder="Describir las competencias y habilidades destacadas..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>📈 Plan de Mejora y Desarrollo</label>
+                                    <textarea id="plan-mejoras" rows="4" placeholder="Aspectos a mejorar, capacitaciones sugeridas y plan de desarrollo..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>💬 Comentarios Adicionales</label>
+                                    <textarea id="comentarios" rows="3" placeholder="Observaciones generales sobre el desempeño..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Enviar Evaluación ✓</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Confirmación -->
+                <section id="confirmacion-section" class="section hidden">
+                    <div class="card-box">
+                        <div class="success-container">
+                            <div class="success-icon">✓</div>
+                            <h2 class="grad-cyan">¡Evaluación Enviada!</h2>
+                            <p>La evaluación de desempeño ha sido registrada exitosamente en el sistema</p>
+                            
+                            <div class="resumen-evaluacion" id="resumen-final"></div>
+                            
+                            <div class="form-actions">
+                                <button class="btn-secondary" onclick="nuevaEvaluacion()">+ Nueva Evaluación</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 ONE - Sistema de Evaluación de Desempeño</p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+    <script src="script.js"></script>
+    <script>
+        // Estrellas animadas
+        const canvas = document.getElementById('stars');
+        if(canvas) {
+            const ctx = canvas.getContext('2d');
+            let W, H;
+            const resize = () => { W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; };
+            window.addEventListener('resize', resize); 
+            resize();
+            const stars = Array.from({length: 80}, () => ({x:Math.random()*W, y:Math.random()*H, r:Math.random()*2}));
+            function draw(){
+                ctx.clearRect(0,0,W,H); 
+                ctx.fillStyle = 'rgba(255,255,255,0.4)';
+                stars.forEach(s => { 
+                  ctx.beginPath(); 
+                  ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); 
+                  ctx.fill(); 
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // Scroll header effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if(window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FIX: Remover required de campos en secciones ocultas antes de submit
+        document.addEventListener('submit', function(e) {
+            // Encontrar todos los campos required que están en elementos hidden
+            document.querySelectorAll('.hidden input[required], .hidden textarea[required], .hidden select[required]').forEach(field => {
+                field.removeAttribute('required');
+            });
+        }, true); // true = captura en fase de captura, antes que el submit del form
+    </script>
+</body>
+</html>
